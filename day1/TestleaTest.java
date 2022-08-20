@@ -1,4 +1,6 @@
-package week3.day1;
+package week2.day1;
+
+import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -26,7 +28,7 @@ public class TestleaTest {
 		
 		//to wait for the browser to load to next pages
 		//to wait for the driver to locate the element
-		driver.manage().window().maximize();
+		driver.	manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		
 		//Enter the User Name
 		//you are telling the driver to go find out the element. 
@@ -66,37 +68,45 @@ public class TestleaTest {
 		driver.findElement(By.id("createLeadForm_firstNameLocal")).sendKeys("Skg");
 		
 		//Enter department field using locator of your choice
-		driver.findElement(By.linkText("createLeadForm_departmentName")).sendKeys("Testing");
+		driver.findElement(By.id("createLeadForm_departmentName")).sendKeys("Testing");
 		
-		//Enter description field using Locator of your choise
-		driver.findElement(By.linkText("createLeadForm_description")).sendKeys("abcdef");
+		//Enter description field using Locator of your choice
+		driver.findElement(By.id("createLeadForm_description")).sendKeys("abcdef");
 		
 		//Enter your email in the email address filed using the locator
-		driver.findElement(By.linkText("createLeadForm_primaryEmail")).sendKeys("xyz@gmail.com");
+		driver.findElement(By.id("createLeadForm_primaryEmail")).sendKeys("xyz@gmail.com");
 		
 		//Click on create button
-		driver.findElement(By.className("Create Lead")).click();
+		driver.findElement(By.className("smallSubmit")).click();
 		
 		//Get the title of the resulting page
 		String title1=driver.getTitle();
 		System.out.println(title1);
 		
 		//To select the drop down value for industry
-	//find the element
-		//use"Select"class to click the element
+		//1.Find the element
+	    //2.Use select class to click the element
 		
-	WebElement industry=driver.findElement(By.id("createLeadForm_industryEnumId"));
-	Select opt=new Select(industry);
-	opt.selectByIndex(3);
+		WebElement source=driver.findElement(By.id("createLeadForm_dataSourceId"));
+		Select drop=new Select(source);
+		drop.selectByIndex(2);
+		
+		
+		WebElement industry=driver.findElement(By.id("createLeadForm_industryEnumId"));
+		Select opt=new Select(industry);
+		opt.selectByIndex(3);
+		
+		//Select using value and visible text
+		WebElement ownership=driver.findElement(By.id("createLeadForm_ownershipEnumId"));
+		Select option=new Select(ownership);
+		option.selectByValue("OWN_PROPRIETOR");
+		option.selectByVisibleText("Sole Proprietorship");
+ 
 	
-	//Select using value and visible text
-	WebElement ownership=driver.findElement(By.id("createLeadForm_ownershipEnumId"));
-	Select option=new Select(ownership);
-	option.selectByValue("OWN_PROPRIETOR");
-	option.selectByVisibleText("Sole Proprietorship");
+	
+	
 
-	
-	
+		
 	
 	
 		
